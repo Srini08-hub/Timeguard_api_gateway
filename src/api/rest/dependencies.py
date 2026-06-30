@@ -49,3 +49,10 @@ def verify_reviewer_role(
     """Verify that the user has the reviewer role, or raise ForbiddenException."""
     if claims.get("role") != "reviewer":
         raise ForbiddenException("Access denied. Reviewer role required.")
+
+def verify_opsadmin_or_reviewer_role(
+        claims: dict[str, str] = Depends(get_current_user_claims)
+    ) -> None:
+    """Verify OpsAdmin or reviewer role for read-only operational views."""
+    if claims.get("role") not in ("OpsAdmin", "reviewer"):
+        raise ForbiddenException("Access denied. OpsAdmin or reviewer role required.")

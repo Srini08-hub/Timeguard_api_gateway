@@ -1,4 +1,5 @@
 import logging
+import uuid
 
 from fastapi import APIRouter, Depends, Request, Response
 
@@ -24,4 +25,16 @@ async def get_under_review_timesheets(request: Request) -> Response:
 @router.get("/processed", dependencies=[Depends(verify_reviewer_role)])
 async def get_processed_timesheets(request: Request) -> Response:
     target_url = f"{settings.CORE_API_URL}/timesheet/processed"
+    return await proxy_request(request, target_url)
+
+
+@router.patch(
+    "/{timesheet_id}/processed",
+    dependencies=[Depends(verify_reviewer_role)],
+)
+async def mark_timesheet_processed(
+    timesheet_id: uuid.UUID,
+    request: Request,
+) -> Response:
+    target_url = f"{settings.CORE_API_URL}/timesheet/{timesheet_id}/processed"
     return await proxy_request(request, target_url)
