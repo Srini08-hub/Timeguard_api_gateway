@@ -8,28 +8,25 @@ from fastapi.responses import JSONResponse
 from src.config.settings import settings
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
-@router.post("/login",
-             response_model=None,
-             status_code=status.HTTP_200_OK
-            )
+@router.post("/login", response_model=None, status_code=status.HTTP_200_OK)
 async def login(
     request: Request,
     response: Response,
-) -> dict[str, str]| JSONResponse:
+) -> dict[str, str] | JSONResponse:
     """Forward login credentials, set cookies on success, and return user info."""
     target_url = f"{settings.AUTH_URL}/auth/login"
     client: httpx.AsyncClient = request.app.state.http_client
 
     headers = {
-        k: v for k, v in request.headers.items()
+        k: v
+        for k, v in request.headers.items()
         if k.lower() not in ("host", "content-length")
     }
     body = await request.body()
@@ -93,7 +90,7 @@ async def refresh(
     request: Request,
     response: Response,
     refresh_token: str | None = Cookie(default=None),
-) -> dict[str, str]| JSONResponse:
+) -> dict[str, str] | JSONResponse:
     """Take refresh token from cookies, call downstream refresh, and update cookies."""
     if not refresh_token:
         return JSONResponse(
@@ -161,7 +158,7 @@ async def logout(
     request: Request,
     response: Response,
     refresh_token: str | None = Cookie(default=None),
-) -> dict[str, str]| JSONResponse:
+) -> dict[str, str] | JSONResponse:
     """Validate access token, forward logout to revoke session, and clear cookies."""
 
     # # Validate the access token before proceeding
@@ -185,7 +182,6 @@ async def logout(
     #         content={"detail": "Invalid or expired token"},
     #         status_code=status.HTTP_401_UNAUTHORIZED,
     #     )
-
 
     target_url = f"{settings.AUTH_URL}/auth/logout"
     client: httpx.AsyncClient = request.app.state.http_client

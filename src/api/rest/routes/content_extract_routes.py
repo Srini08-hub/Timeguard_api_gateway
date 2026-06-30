@@ -9,8 +9,7 @@ from src.utils.proxy import proxy_request
 router = APIRouter(prefix="/content-extracts", tags=["content-extracts"])
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 

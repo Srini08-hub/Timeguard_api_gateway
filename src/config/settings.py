@@ -8,6 +8,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+
 class Settings(BaseSettings):
     """Environment-driven gateway configuration."""
 
@@ -15,7 +16,6 @@ class Settings(BaseSettings):
         env_file=BASE_DIR / ".env",
         env_file_encoding="utf-8",
     )
-
 
     JWT_SECRET: str = Field(default="change-me-in-production")
     JWT_ALGORITHM: str = "HS256"
@@ -26,7 +26,6 @@ class Settings(BaseSettings):
     HTTP_CLIENT_TIMEOUT: float = 30.0
     HTTP_CLIENT_MAX_CONNECTIONS: int = 100
     HTTP_CLIENT_MAX_KEEPALIVE_CONNECTIONS: int = 20
-
 
     # ── Cookie settings ───────────────────────────────────────────────────────
     # Set COOKIE_SECURE=true in GCP / any HTTPS environment.
@@ -48,8 +47,6 @@ class Settings(BaseSettings):
     def cors_origins_list(self) -> list[str]:
         """Split the comma-separated CORS_ORIGINS string into a list."""
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
-
-
 
 
 settings = Settings()

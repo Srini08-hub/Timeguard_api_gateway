@@ -35,9 +35,7 @@ async def get_assignments_by_employee(
     request: Request,
 ) -> Response:
     """Get assignments by employee (proxied to core backend)."""
-    target_url = (
-        f"{settings.CORE_API_URL}/assignments/employee/{emp_id}"
-    )
+    target_url = f"{settings.CORE_API_URL}/assignments/employee/{emp_id}"
     return await proxy_request(request, target_url)
 
 
@@ -50,9 +48,7 @@ async def get_assignments_by_client(
     request: Request,
 ) -> Response:
     """Get assignments by client (proxied to core backend)."""
-    target_url = (
-        f"{settings.CORE_API_URL}/assignments/client/{client_id}"
-    )
+    target_url = f"{settings.CORE_API_URL}/assignments/client/{client_id}"
     return await proxy_request(request, target_url)
 
 
@@ -65,9 +61,7 @@ async def get_assignments_by_department(
     request: Request,
 ) -> Response:
     """Get assignments by department (proxied to core backend)."""
-    target_url = (
-        f"{settings.CORE_API_URL}/assignments/department/{department_id}"
-    )
+    target_url = f"{settings.CORE_API_URL}/assignments/department/{department_id}"
     return await proxy_request(request, target_url)
 
 
@@ -80,9 +74,7 @@ async def get_assignment(
     request: Request,
 ) -> Response:
     """Get assignment by ID (proxied to core backend)."""
-    target_url = (
-        f"{settings.CORE_API_URL}/assignments/{assignment_id}"
-    )
+    target_url = f"{settings.CORE_API_URL}/assignments/{assignment_id}"
     return await proxy_request(request, target_url)
 
 
@@ -95,9 +87,7 @@ async def update_assignment(
     request: Request,
 ) -> Response:
     """Update assignment (proxied to core backend)."""
-    target_url = (
-        f"{settings.CORE_API_URL}/assignments/{assignment_id}"
-    )
+    target_url = f"{settings.CORE_API_URL}/assignments/{assignment_id}"
     return await proxy_request(request, target_url)
 
 
@@ -110,7 +100,5 @@ async def delete_assignment(
     request: Request,
 ) -> Response:
     """Delete assignment (proxied to core backend)."""
-    target_url = (
-        f"{settings.CORE_API_URL}/assignments/{assignment_id}"
-    )
+    target_url = f"{settings.CORE_API_URL}/assignments/{assignment_id}"
     return await proxy_request(request, target_url)

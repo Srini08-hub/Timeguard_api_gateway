@@ -9,14 +9,12 @@ from src.api.rest.dependencies import (
 from src.config.settings import settings
 from src.utils.proxy import proxy_request
 
-router = APIRouter(prefix="/users",tags=["users"])
+router = APIRouter(prefix="/users", tags=["users"])
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
-
 
 
 @router.get("/me")

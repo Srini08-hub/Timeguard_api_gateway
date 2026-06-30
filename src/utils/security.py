@@ -21,12 +21,12 @@ def decode_access_token(token: str | None) -> dict[str, str]:
 
     try:
         payload = cast(
-        dict[str, str],
-        jwt.decode(
-            token,
-            settings.JWT_SECRET,
-            algorithms=[settings.JWT_ALGORITHM],
-        ),
+            dict[str, str],
+            jwt.decode(
+                token,
+                settings.JWT_SECRET,
+                algorithms=[settings.JWT_ALGORITHM],
+            ),
         )
     except ExpiredSignatureError as exc:
         raise UnauthorizedException("Token expired") from exc

@@ -8,17 +8,12 @@ from src.utils.proxy import proxy_request
 
 # from urllib.parse import urlencode
 
-router = APIRouter(prefix="/emails",tags=["emails"])
+router = APIRouter(prefix="/emails", tags=["emails"])
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
-
-
-
-
 
 
 @router.get("/timesheet-emails", dependencies=[Depends(verify_reviewer_role)])
@@ -42,6 +37,7 @@ async def get_emails_by_status(
 ) -> Response:
     target_url = f"{settings.CORE_API_URL}/emails?status={status}"
     return await proxy_request(request, target_url)
+
 
 @router.get("/{email_id}/attachments", dependencies=[Depends(verify_reviewer_role)])
 async def get_attachments(
