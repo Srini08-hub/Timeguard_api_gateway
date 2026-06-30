@@ -28,6 +28,33 @@ async def get_timecards_by_timesheet(
     return await proxy_request(request, target_url)
 
 
+@router.get(
+    "/approved/export",
+    dependencies=[Depends(verify_reviewer_role)],
+)
+async def export_approved_timecards(request: Request) -> Response:
+    target_url = f"{settings.CORE_API_URL}/timecards/approved/export"
+    return await proxy_request(request, target_url)
+
+
+@router.get(
+    "/approved",
+    dependencies=[Depends(verify_reviewer_role)],
+)
+async def get_approved_timecards(request: Request) -> Response:
+    target_url = f"{settings.CORE_API_URL}/timecards/approved"
+    return await proxy_request(request, target_url)
+
+
+@router.get(
+    "/rejected",
+    dependencies=[Depends(verify_reviewer_role)],
+)
+async def get_rejected_timecards(request: Request) -> Response:
+    target_url = f"{settings.CORE_API_URL}/timecards/rejected"
+    return await proxy_request(request, target_url)
+
+
 @router.patch(
     "/bulk/approve",
     dependencies=[Depends(verify_reviewer_role)],

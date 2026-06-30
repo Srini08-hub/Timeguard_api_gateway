@@ -58,4 +58,3 @@ def get_app() -> FastAPI:
     # Register exception handlers
     exception_handlers.register_exception_handlers(app)
     return app
-

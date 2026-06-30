@@ -17,7 +17,8 @@ async def proxy_request(
 
     # Prepare headers (excluding Host and Content-Length)
     headers = {
-        k: v for k, v in request.headers.items()
+        k: v
+        for k, v in request.headers.items()
         if k.lower() not in ("host", "content-length")
     }
 
@@ -55,7 +56,8 @@ async def proxy_request(
     }
 
     response_headers = {
-        k: v for k, v in backend_response.headers.items()
+        k: v
+        for k, v in backend_response.headers.items()
         if k.lower() not in excluded_headers
     }
 
@@ -67,6 +69,5 @@ async def proxy_request(
     )
 
     # Forward any Set-Cookie headers from downstream
-
 
     return gateway_response

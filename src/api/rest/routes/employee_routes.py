@@ -41,6 +41,7 @@ async def get_active_employees(
     target_url = f"{settings.CORE_API_URL}/employees/active"
     return await proxy_request(request, target_url)
 
+
 @router.get("/inactive")
 async def get_inactive_employees(
     request: Request,
@@ -59,6 +60,7 @@ async def get_unassigned_employees(
     """Get unassigned employees (proxied to core backend)."""
     target_url = f"{settings.CORE_API_URL}/employees/unassigned"
     return await proxy_request(request, target_url)
+
 
 @router.get("/{emp_id}")
 async def get_employee(
