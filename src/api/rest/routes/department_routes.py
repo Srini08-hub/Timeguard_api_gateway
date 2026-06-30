@@ -3,7 +3,10 @@ import uuid
 
 from fastapi import APIRouter, Depends, Request, Response
 
-from src.api.rest.dependencies import verify_opsadmin_or_reviewer_role, verify_opsadmin_role
+from src.api.rest.dependencies import (
+    verify_opsadmin_or_reviewer_role,
+    verify_opsadmin_role,
+)
 from src.config.settings import settings
 from src.utils.proxy import proxy_request
 
