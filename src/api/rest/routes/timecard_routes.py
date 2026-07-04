@@ -64,6 +64,15 @@ async def approve_timecards(request: Request) -> Response:
     return await proxy_request(request, target_url)
 
 
+@router.patch(
+    "/bulk/reject",
+    dependencies=[Depends(verify_reviewer_role)],
+)
+async def reject_timecards(request: Request) -> Response:
+    target_url = f"{settings.CORE_API_URL}/timecards/bulk/reject"
+    return await proxy_request(request, target_url)
+
+
 @router.get(
     "/{timecard_id}",
     dependencies=[Depends(verify_reviewer_role)],
@@ -110,3 +119,4 @@ async def reject_timecard(
 ) -> Response:
     target_url = f"{settings.CORE_API_URL}/timecards/{timecard_id}/reject"
     return await proxy_request(request, target_url)
+
