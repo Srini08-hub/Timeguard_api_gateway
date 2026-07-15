@@ -1,8 +1,7 @@
 import logging
 
-from fastapi import APIRouter, Depends, Request, Response
+from fastapi import APIRouter, Request, Response
 
-from src.api.rest.dependencies import verify_reviewer_role
 from src.config.settings import settings
 from src.utils.proxy import proxy_request
 
@@ -15,8 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 @router.get(
-    "/{path:path}",
-    dependencies=[Depends(verify_reviewer_role)],
+    "/{path:path}"
 )
 async def get_attachment(
     path: str,
